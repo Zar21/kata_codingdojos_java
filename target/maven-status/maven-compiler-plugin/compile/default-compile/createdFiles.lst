@@ -1,0 +1,13 @@
+character/Coordinates.class
+attacks/HeHas5MoreLevelsAttack.class
+attacks/SameCharacterAttack.class
+fighter/Melee.class
+attacks/Attack.class
+attacks/NormalAttack.class
+character/Character.class
+fighter/Fighter.class
+attacks/HaveRangeAttack.class
+attacks/IHave5MoreLevelsAttack.class
+attacks/IsAlliedAttack.class
+example/BankAccount.class
+fighter/Ranged.class

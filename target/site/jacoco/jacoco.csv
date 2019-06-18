@@ -1,0 +1,13 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+your-kata-project,character,Coordinates,0,13,0,0,0,6,0,3,0,3
+your-kata-project,character,Character,2,150,2,10,1,46,2,21,0,17
+your-kata-project,attacks,HeHas5MoreLevelsAttack,0,26,0,2,0,5,0,3,0,2
+your-kata-project,attacks,NormalAttack,0,15,0,0,0,3,0,2,0,2
+your-kata-project,attacks,IHave5MoreLevelsAttack,0,29,0,2,0,5,0,3,0,2
+your-kata-project,attacks,HaveRangeAttack,0,21,0,2,0,4,0,3,0,2
+your-kata-project,attacks,Attack,0,19,0,2,0,6,0,4,0,3
+your-kata-project,attacks,IsAlliedAttack,0,27,0,4,0,6,0,4,0,2
+your-kata-project,attacks,SameCharacterAttack,0,13,0,2,0,5,0,3,0,2
+your-kata-project,fighter,Melee,0,9,0,0,0,3,0,2,0,2
+your-kata-project,fighter,Ranged,0,9,0,0,0,3,0,2,0,2
+your-kata-project,example,BankAccount,0,17,0,0,0,5,0,3,0,3

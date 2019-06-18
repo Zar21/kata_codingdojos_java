@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ca"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Character.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">your-kata-project</a> &gt; <a href="index.source.html" class="el_package">character</a> &gt; <span class="el_source">Character.java</span></div><h1>Character.java</h1><pre class="source lang-java linenums">package character;
+
+import java.util.ArrayList;
+
+import attacks.*;
+import fighter.*;
+
+public class Character {
+
+	private int health;
+	private int level;
+	private int attack;
+	private Coordinates position;
+	private Fighter type;
+	private ArrayList &lt;String&gt; factions;
+	public static final int MAX_HEALTH = 1000;
+
+<span class="fc" id="L18">	public Character() {</span>
+<span class="fc" id="L19">		this.health = MAX_HEALTH;</span>
+<span class="fc" id="L20">		this.level = 1;</span>
+<span class="fc" id="L21">		this.position = new Coordinates();</span>
+<span class="fc" id="L22">		this.type = new Melee();</span>
+<span class="fc" id="L23">		this.factions = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L24">	}</span>
+
+	
+	public ArrayList&lt;String&gt; getFactions() {
+<span class="fc" id="L28">		return factions;</span>
+	}
+
+	public void addFaction(String faction) {
+<span class="fc" id="L32">		factions.add(faction);</span>
+<span class="fc" id="L33">	}</span>
+	public int getAttack() {
+<span class="fc" id="L35">		return attack;</span>
+	}
+
+	public void setAttack(int attack) {
+<span class="fc" id="L39">		this.attack = attack;</span>
+<span class="fc" id="L40">	}</span>
+
+	public int getHealth() {
+<span class="fc" id="L43">		return health;</span>
+	}
+
+	public void setHealth(int health) {
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">		if (this.health &gt; 0) {</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">			if (health &gt; MAX_HEALTH) {</span>
+<span class="fc" id="L49">				health = MAX_HEALTH;</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">			} else if (health &lt; 0) {</span>
+<span class="nc" id="L51">				health = 0;</span>
+			}
+<span class="fc" id="L53">			this.health = health;</span>
+		}
+<span class="fc" id="L55">	}</span>
+
+	public int getLevel() {
+<span class="fc" id="L58">		return level;</span>
+	}
+
+	public void setLevel(int level) {
+<span class="fc" id="L62">		this.level = level;</span>
+<span class="fc" id="L63">	}</span>
+
+	public boolean isAlive() {
+<span class="fc bfc" id="L66" title="All 2 branches covered.">		return (health &gt; 0);</span>
+	}
+
+	public void attack(Character character) {
+<span class="fc" id="L70">		Attack attack = new SameCharacterAttack();</span>
+<span class="fc" id="L71">		attack.linkWith(new IsAlliedAttack())</span>
+<span class="fc" id="L72">		.linkWith(new HaveRangeAttack())</span>
+<span class="fc" id="L73">		.linkWith(new HeHas5MoreLevelsAttack())</span>
+<span class="fc" id="L74">		.linkWith(new IHave5MoreLevelsAttack())</span>
+<span class="fc" id="L75">		.linkWith(new NormalAttack());</span>
+		
+<span class="fc" id="L77">		attack.execute(this, character);</span>
+		/*if (this != character) {  //SameCharacter
+			boolean haveEnoughRange = character.getPosition().getX() &lt;= this.getPosition().getX() + this.getType().getRange();
+			if (haveEnoughRange) { 
+				boolean heHas5MoreLevels = (character.getLevel() - 5) &gt;= this.getLevel();
+				boolean IHave5MoreLevels = (this.getLevel() - 5) &gt;= character.getLevel();
+
+				if (heHas5MoreLevels) {
+					character.setHealth(character.getHealth() - (this.attack / 2));
+				} else if (IHave5MoreLevels) {
+					character.setHealth(character.getHealth() - (this.attack + (this.attack / 2)));
+				} else { //NormalAttack
+					character.setHealth(character.getHealth() - this.attack);
+				}
+			}
+		}*/
+<span class="fc" id="L93">	}</span>
+
+
+	public void heal(int heal) {
+<span class="fc" id="L97">		this.setHealth(this.getHealth() + heal);</span>
+<span class="fc" id="L98">	}</span>
+
+	public void heal(Character character, int heal) {
+<span class="fc bfc" id="L101" title="All 2 branches covered.">		for (String faction : this.getFactions()) {</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">			if (character.getFactions().contains(faction)) {</span>
+<span class="fc" id="L103">				character.setHealth(character.getHealth() + heal);</span>
+<span class="fc" id="L104">				break;</span>
+			}
+<span class="fc" id="L106">		}	</span>
+<span class="fc" id="L107">	}</span>
+	
+	public Coordinates getPosition() {
+<span class="fc" id="L110">		return position;</span>
+	}
+
+	public void setPosition(Coordinates position) {
+<span class="fc" id="L114">		this.position = position;</span>
+<span class="fc" id="L115">	}</span>
+
+	public Fighter getType() {
+<span class="fc" id="L118">		return type;</span>
+	}
+
+	public void setType(Fighter type) {
+<span class="fc" id="L122">		this.type = type;</span>
+<span class="fc" id="L123">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
